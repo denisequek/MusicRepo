@@ -28,3 +28,26 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+spotify_features %>% 
+  ggplot(aes(x = loudness)) +
+  geom_histogram(binwidth = 5)
+  
+spotify_features %>% 
+  ggplot(aes(x = subtype, y = acousticness)) +
+  geom_boxplot()
+  
+spotify_features %>% 
+  ggplot(aes(x = type, y = danceability, fill = subtype)) +
+  geom_violin()
+  
+spotify_features %>% 
+  ggplot(aes(x = valence, y = energy)) + 
+  facet_wrap(~ type) +
+  stat_density_2d(
+    geom = 'raster', 
+    aes(fill = stat(density)), 
+    contour = FALSE
+  ) + 
+  geom_jitter(colour = 'white', alpha = 0.5) + 
+  coord_equal()
